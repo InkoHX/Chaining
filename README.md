@@ -8,4 +8,4 @@
 
 ## 最大同時破壊回数を変更する
 
-デフォルトでは`50`に設定されていますが、`plugins/Chaining`の`config.yml`にある`maxBreakCount`の数値を書き換えることによって変更可能です。
+デフォルトでは**50回**に設定されていますが、`plugins/Chaining`の`config.yml`にある`maxBreakCount`の数値を書き換えることで変更可能です。
