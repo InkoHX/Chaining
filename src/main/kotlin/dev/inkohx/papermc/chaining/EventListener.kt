@@ -12,7 +12,7 @@ class EventListener(plugin: Chaining) : Listener {
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
         val player = event.player
-        val tool = player.itemOnCursor
+        val tool = player.inventory.itemInMainHand
 
         if (!player.isSneaking) return
         if (!event.block.isValidTool(tool)) return
