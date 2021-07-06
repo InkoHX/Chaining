@@ -19,15 +19,13 @@ class EventListener(plugin: Chaining) : Listener {
         if (!Contants.availableBlocks.contains(event.block.type)) return
 
         tailrec fun getTargetBlocks(
-            targetBlocks: List<Block> = listOf(event.block),
-            collectBlocks: List<Block> = listOf(event.block),
+            targetBlocks: List<Block>,
+            collectBlocks: List<Block> = listOf(),
         ): List<Block> {
-            if (collectBlocks.size >= maxBreakCount) return collectBlocks.take(maxBreakCount)
-
             val aroundBlocks = BlockFace.values()
                 .map { blockFace -> targetBlocks.map { block -> block.getRelative(blockFace, 1) } }
                 .flatten()
-                .filter { block -> collectBlocks.any { collectBlock -> block.blockKey == collectBlock.blockKey }.not() }
+                .filter { block -> !collectBlocks.any { collectBlock -> block.blockKey == collectBlock.blockKey } }
                 .filter { block -> (Contants.availableBlocks.contains(block.type)) and (block.type == event.block.type) }
 
             if (aroundBlocks.isEmpty()) return collectBlocks.distinctBy { it.blockKey }.take(maxBreakCount)
@@ -38,6 +36,6 @@ class EventListener(plugin: Chaining) : Listener {
             else getTargetBlocks(aroundBlocks, totalTargetBlocks)
         }
 
-        getTargetBlocks().forEach { it.breakNaturally(tool) }
+        getTargetBlocks(listOf(event.block)).forEach { it.breakNaturally(tool) }
     }
 }
