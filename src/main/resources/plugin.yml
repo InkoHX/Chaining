@@ -1,0 +1,4 @@
+name: Chaining
+api-version: 1.16
+main: dev.inkohx.papermc.chaining.Chaining
+version: 1.0.0

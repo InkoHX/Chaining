@@ -1,0 +1,2 @@
+# Please specify the maximum number of blocks to break at one time. (integer)
+maxBreakCount: 50
